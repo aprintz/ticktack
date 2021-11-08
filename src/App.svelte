@@ -28,7 +28,7 @@
     canvas.style.pointerEvents = "none";
     canvas.style.width = 200 + "px";
     canvas.style.height = 200 + "px";
-    canvas.style.zIndex = 100;
+    canvas.style.zIndex = 99;
     canvas.width = 200 * ratio;
     canvas.height = 200 * ratio;
     document.body.appendChild(canvas);
@@ -117,7 +117,7 @@
     showingTick = true;
     setTimeout(function () {
       showingTick = false;
-    }, 500);
+    }, 400);
 
     tick.play();
   }
@@ -138,7 +138,7 @@
   function startTimer(duration) {
     var start = Date.now();
     function timer() {
-      var diff = duration - (((Date.now() - start) / 1000) | 0);
+      var diff = duration - (((Date.now() - start) / 800) | 0);
       console.log(diff);
       if (diff <= 0) {
         playBoom();
@@ -147,7 +147,7 @@
       }
     }
     timer();
-    timerInstance = setInterval(timer, 1000);
+    timerInstance = setInterval(timer, 800);
   }
 
   function changeRunning() {
@@ -160,6 +160,7 @@
       }
     } else {
       startTimer(getRandomTime());
+      showingBoom = false;
       const pos = getOffset(bomb);
       startExplosions(pos.left, pos.top);
     }
@@ -221,6 +222,7 @@
     color: #e3d310;
     font-size: 3em;
     font-weight: 700;
+    z-index: 100;
     background-image: url(/images/backbubble.png);
     background-repeat: no-repeat;
     background-size: contain;
